@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://da0676364u0p"]
+
+[ext_resource type="Script" uid="uid://clbgcsqgoroel" path="res://Scenes/Player/escafandra.gd" id="1_k8dfv"]
+[ext_resource type="Texture2D" uid="uid://dtvr2va0ujrkt" path="res://icon.svg" id="1_sj4ko"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k8dfv"]
+radius = 62.0
+height = 128.0
+
+[node name="Escafandra" type="CharacterBody2D" unique_id=345619498]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_k8dfv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=583592421]
+texture = ExtResource("1_sj4ko")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=88343371]
+shape = SubResource("CapsuleShape2D_k8dfv")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=676467142]

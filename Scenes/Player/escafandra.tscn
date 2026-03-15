@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://da0676364u0p"]
+
+[ext_resource type="Script" uid="uid://clbgcsqgoroel" path="res://Scenes/Player/escafandra.gd" id="1_k8dfv"]
+[ext_resource type="Texture2D" uid="uid://dtvr2va0ujrkt" path="res://icon.svg" id="1_sj4ko"]
+[ext_resource type="PackedScene" uid="uid://bqp33kpnpbiop" path="res://Scenes/UI/UI.tscn" id="2_r0517"]
+[ext_resource type="Script" uid="uid://xltsyt63vak0" path="res://Scenes/Player/state_machine.gd" id="3_qx6s5"]
+[ext_resource type="Script" uid="uid://q25xrpte3b2t" path="res://Scenes/Player/base.gd" id="4_g3y4w"]
+[ext_resource type="Script" uid="uid://dpu4t4hogyfha" path="res://Scenes/Player/jump.gd" id="5_gmpxy"]
+[ext_resource type="Script" uid="uid://b8jsxeshj7f8v" path="res://Scenes/Player/swim.gd" id="5_l10je"]
+[ext_resource type="Script" uid="uid://ifb338ub68x4" path="res://Scenes/Player/idle.gd" id="6_y54si"]
+[ext_resource type="Script" uid="uid://bfsy0y6rugyjo" path="res://Scenes/Player/attack.gd" id="7_gmpxy"]
+[ext_resource type="Script" uid="uid://datigq4c5vqv2" path="res://Scenes/Player/hit.gd" id="8_r0517"]
+[ext_resource type="Script" uid="uid://bbltkc50veo63" path="res://Scenes/Player/death.gd" id="9_0ucsf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k8dfv"]
+radius = 62.0
+height = 128.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0517"]
+radius = 63.06346
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ucsf"]
+radius = 126.30122
+
+[node name="Escafandra" type="CharacterBody2D" unique_id=345619498]
+collision_layer = 2
+script = ExtResource("1_k8dfv")
+
+[node name="UI" parent="." unique_id=1313506091 instance=ExtResource("2_r0517")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=583592421]
+texture = ExtResource("1_sj4ko")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=88343371]
+shape = SubResource("CapsuleShape2D_k8dfv")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=676467142]
+position_smoothing_enabled = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=867681894 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_qx6s5")
+initial_state = NodePath("Idle")
+
+[node name="Base" type="Node" parent="StateMachine" unique_id=341685172]
+script = ExtResource("4_g3y4w")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=801341879]
+script = ExtResource("5_gmpxy")
+
+[node name="Swim" type="Node" parent="StateMachine" unique_id=1448524214]
+script = ExtResource("5_l10je")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1403206925]
+script = ExtResource("6_y54si")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=721180154]
+script = ExtResource("7_gmpxy")
+
+[node name="Hit" type="Node" parent="StateMachine" unique_id=60798792]
+script = ExtResource("8_r0517")
+
+[node name="Death" type="Node" parent="StateMachine" unique_id=197065047]
+script = ExtResource("9_0ucsf")
+
+[node name="HitArea" type="Area2D" parent="." unique_id=1524499124]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=463230595]
+shape = SubResource("CircleShape2D_r0517")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1257836137]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1338966677]
+shape = SubResource("CircleShape2D_0ucsf")
+
+[connection signal="area_entered" from="HitArea" to="StateMachine/Swim" method="_on_hit_area_area_entered"]
+[connection signal="area_entered" from="HitArea" to="StateMachine/Idle" method="_on_hit_area_area_entered"]
+
+[editable path="UI"]

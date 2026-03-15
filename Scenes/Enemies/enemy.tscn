@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cdkfkadm4ufit"]
+
+[ext_resource type="Texture2D" uid="uid://dtvr2va0ujrkt" path="res://icon.svg" id="1_613su"]
+[ext_resource type="Script" uid="uid://nfr7n88brada" path="res://Scenes/Enemies/enemy.gd" id="1_jcvw6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_613su"]
+radius = 63.0
+height = 128.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_613su"]
+size = Vector2(134, 135)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_613su"]
+radius = 63.953106
+
+[node name="Enemy" type="RigidBody2D" unique_id=1523580661]
+collision_layer = 4
+script = ExtResource("1_jcvw6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=854951273]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_613su")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2129016104]
+shape = SubResource("CapsuleShape2D_613su")
+
+[node name="HitArea" type="Area2D" parent="." unique_id=283893900]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=124170574]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_613su")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1385897434]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=238732965]
+shape = SubResource("CircleShape2D_613su")
+
+[connection signal="area_entered" from="HitArea" to="." method="_on_hit_area_area_entered"]
