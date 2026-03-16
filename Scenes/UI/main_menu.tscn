@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://c3ox33ed7u574"]
+
+[ext_resource type="Script" uid="uid://drqptkoulm2i8" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://cd55bsyrh7w5b" path="res://Assets/underwater-diving-files/PNG/environment/background.png" id="2_i2xx2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rhts7"]
+bg_color = Color(0.7122757, 0.705378, 1, 1)
+
+[sub_resource type="Theme" id="Theme_06t4h"]
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_rhts7")
+
+[node name="MainMenu" type="Node2D" unique_id=1214609753]
+script = ExtResource("1_06t4h")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1264165229]
+scroll_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1284479547]
+scale = Vector2(6.722222, 4.3125)
+texture = ExtResource("2_i2xx2")
+centered = false
+
+[node name="Title" type="Label" parent="." unique_id=32048409]
+offset_right = 1920.0
+offset_bottom = 409.0
+theme_override_font_sizes/font_size = 200
+text = "Escafandra"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1136046140]
+offset_top = 500.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = SubResource("Theme_06t4h")
+
+[node name="MainButtons" type="VBoxContainer" parent="CenterContainer" unique_id=623064749]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Play" type="Button" parent="CenterContainer/MainButtons" unique_id=412368941]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "JUGAR"
+
+[node name="Settings" type="Button" parent="CenterContainer/MainButtons" unique_id=1720934403]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "OPCIONES"
+
+[node name="Credits" type="Button" parent="CenterContainer/MainButtons" unique_id=1234299100]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "CREDITOS"
+
+[node name="Quit" type="Button" parent="CenterContainer/MainButtons" unique_id=2089349407]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "SALIR"
+
+[node name="SettingsMenu" type="VBoxContainer" parent="CenterContainer" unique_id=1575910352]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 23
+
+[node name="Fullscreen" type="CheckBox" parent="CenterContainer/SettingsMenu" unique_id=625075994]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "FULLSCREEN"
+
+[node name="MainVolSlider" type="HSlider" parent="CenterContainer/SettingsMenu" unique_id=2122714459]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/SettingsMenu/MainVolSlider" unique_id=586973754]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 454.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 40
+text = "Main Volume"
+horizontal_alignment = 1
+
+[node name="MusicVolSlider" type="HSlider" parent="CenterContainer/SettingsMenu" unique_id=1758399879]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/SettingsMenu/MusicVolSlider" unique_id=927643022]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 454.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 40
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="SFXVolSlider" type="HSlider" parent="CenterContainer/SettingsMenu" unique_id=1311346052]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/SettingsMenu/SFXVolSlider" unique_id=1365191653]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 454.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 40
+text = "SFX Volume"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="CenterContainer/SettingsMenu" unique_id=669901281]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 75
+text = "ATRAS"
+
+[node name="CreditsMenu" type="VBoxContainer" parent="CenterContainer" unique_id=1908006751]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/CreditsMenu" unique_id=1228859997]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "By Nicolas Venegas"
+
+[node name="Back" type="Button" parent="CenterContainer/CreditsMenu" unique_id=1864235610]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 75
+text = "ATRAS"
+
+[connection signal="pressed" from="CenterContainer/MainButtons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CenterContainer/MainButtons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CenterContainer/MainButtons/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="CenterContainer/MainButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="toggled" from="CenterContainer/SettingsMenu/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="value_changed" from="CenterContainer/SettingsMenu/MainVolSlider" to="." method="_on_main_vol_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/SettingsMenu/MusicVolSlider" to="." method="_on_music_vol_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/SettingsMenu/SFXVolSlider" to="." method="_on_sfx_vol_slider_value_changed"]
+[connection signal="pressed" from="CenterContainer/SettingsMenu/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CenterContainer/CreditsMenu/Back" to="." method="_on_back_pressed"]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cheuao1ercb8e"]
+
+[ext_resource type="Script" uid="uid://criasrjpgwk0o" path="res://Scenes/World/bubble_generator.gd" id="1_kj3me"]
+[ext_resource type="PackedScene" uid="uid://twlfmxuibkxh" path="res://Scenes/World/bubble.tscn" id="2_oxpx6"]
+
+[node name="BubbleGenerator" type="Node2D" unique_id=1253591409]
+script = ExtResource("1_kj3me")
+
+[node name="Bubble" parent="." unique_id=1999413019 instance=ExtResource("2_oxpx6")]
+
+[node name="BubbleAppearTimer" type="Timer" parent="." unique_id=604158558]
+autostart = true
+
+[connection signal="timeout" from="BubbleAppearTimer" to="." method="_on_bubble_appear_timer_timeout"]
