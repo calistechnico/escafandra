@@ -8,7 +8,7 @@ var end = false
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	
 func _ready() -> void:
-	get_tree().pause = true
+	get_tree().paused = true
 
 func _process(delta: float) -> void:
 	if end:
